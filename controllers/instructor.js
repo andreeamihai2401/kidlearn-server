@@ -17,7 +17,7 @@ export const makeInstructor = async (req, res) => {
     let accountLink = await stripe.accountLinks.create({
       account: user.stripe_account_id,
       refresh_url: process.env.STRIPE_REDIRECT_URL,
-      return_url: "http://164.92.163.3/stripe/callback",
+      return_url: process.env.STRIPE_REDIRECT_URL,
       type: "account_onboarding",
     });
 

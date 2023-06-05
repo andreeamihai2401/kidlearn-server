@@ -17,7 +17,7 @@ export const makeInstructor = async (req, res) => {
     let accountLink = await stripe.accountLinks.create({
       account: user.stripe_account_id,
       refresh_url: process.env.STRIPE_REDIRECT_URL,
-      return_url: process.env.STRIPE_REDIRECT_URL,
+      return_url: "http://164.92.163.3/stripe/callback",
       type: "account_onboarding",
     });
 
@@ -25,9 +25,7 @@ export const makeInstructor = async (req, res) => {
       "stripe_user[email]": user.email,
     });
 
-    const httpUrl = accountLink.url.replace(/^https:/, "http:");
-
-    res.send(`${httpUrl}?${queryString.stringify(httpUrl)}`);
+    res.send(`${accountLink.url}?${queryString.stringify(accountLink)}`);
   } catch (err) {
     console.log("MAKE INSTRUCTOR ERR", err);
   }

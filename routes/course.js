@@ -48,7 +48,7 @@ router.get("/course/:slug", read);
 router.post(
   "/course/file-upload/:instructorId",
   requireSignin,
-  formidable(),
+  formidable({ maxFileSize: 500 * 1024 * 1024 }),
   uploadFile
 );
 router.post("/course/file-remove/:instructorId", requireSignin, removeFile);

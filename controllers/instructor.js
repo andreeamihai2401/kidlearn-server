@@ -25,14 +25,9 @@ export const makeInstructor = async (req, res) => {
       "stripe_user[email]": user.email,
     });
 
-    const httpUrl = accountLink.replace(/^https:/, "http:");
+    const httpUrl = accountLink.url.replace(/^https:/, "http:");
 
-    // Perform any necessary logic with the HTTP URL
-    console.log(httpUrl);
-
-    return;
-
-    res.send(`${accountLink.url}?${queryString.stringify(accountLink)}`);
+    res.send(`${httpUrl}?${queryString.stringify(httpUrl)}`);
   } catch (err) {
     console.log("MAKE INSTRUCTOR ERR", err);
   }
